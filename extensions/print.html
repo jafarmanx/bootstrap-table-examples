@@ -1,0 +1,45 @@
+<script>
+init({
+  title: 'Print',
+  desc: 'Use Plugin: bootstrap-table-print.',
+  links: [
+    'bootstrap-table.min.css'
+  ],
+  scripts: [
+    'bootstrap-table.min.js',
+    'extensions/print/bootstrap-table-print.min.js'
+  ]
+})
+</script>
+
+<template>
+  <table
+    id="table"
+    data-show-print="true"
+    data-url="json/data1.json"
+  >
+    <thead>
+      <tr>
+        <th data-field="id">
+          ID
+        </th>
+        <th data-field="name">
+          Item Name
+        </th>
+        <th data-field="price">
+          <i class="fa fa-print"></i> Item Price
+        </th>
+      </tr>
+    </thead>
+  </table>
+</template>
+
+<script>
+  const $table = $('#table')
+
+  function mounted () {
+    $table.bootstrapTable({
+      printStyles: ['https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css']
+    })
+  }
+</script>

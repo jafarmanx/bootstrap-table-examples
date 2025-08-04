@@ -1,0 +1,50 @@
+<script>
+init({
+  title: 'Response Handler',
+  desc: 'Use `responseHandler` option to handle the response data.',
+  links: ['bootstrap-table.min.css'],
+  scripts: ['bootstrap-table.min.js']
+})
+</script>
+
+<template>
+  <table id="table"></table>
+</template>
+
+<script>
+  function mounted () {
+    $('#table').bootstrapTable({
+      url: 'json/353.json',
+      columns: [
+        {
+          field: 'date',
+          title: 'Date Stamp',
+          sortable: true
+        },
+        {
+          field: 'm_type',
+          title: 'Type',
+          sortable: true
+        },
+        {
+          field: 'msdn',
+          title: 'MSDN',
+          sortable: true
+        },
+        {
+          field: 'file_name',
+          title: 'File Name',
+          sortable: true
+        },
+        {
+          field: 'message',
+          title: 'Message',
+          sortable: true
+        }
+      ],
+      responseHandler (res) {
+        return res.messages
+      }
+    })
+  }
+</script>

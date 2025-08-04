@@ -1,0 +1,114 @@
+<script>
+init({
+  title: 'Vue Component',
+  desc: 'Use plugins: [Vue.js](https://vuejs.org) and `bootstrap-table` vue component.',
+  links: [
+    'bootstrap-table.min.css'
+  ],
+  scripts: [
+    'https://unpkg.com/vue@3/dist/vue.global.js',
+    'bootstrap-table.min.js',
+    'https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.2/dist/bootstrap-table-vue.umd.js'
+  ]
+})
+</script>
+
+<template>
+  <div id="app">
+    <bootstrap-table
+      :columns="columns"
+      :data="data"
+      :options="options"
+    ></bootstrap-table>
+  </div>
+</template>
+
+<script>
+  function mounted () {
+    const { createApp, ref } = window.Vue
+    const app = createApp({
+      setup () {
+        const columns = ref([
+          {
+            field: 'state',
+            checkbox: true
+          },
+          {
+            title: 'Item ID',
+            field: 'id'
+          },
+          {
+            field: 'name',
+            title: 'Item Name'
+          },
+          {
+            field: 'price',
+            title: 'Item Price'
+          },
+          {
+            field: 'action',
+            title: 'Actions',
+            align: 'center',
+            formatter () {
+              return '<a href="javascript:" class="like"><i class="fa fa-star"></i></a>'
+            },
+            events: {
+              'click .like' (e, value, row) {
+                alert(JSON.stringify(row))
+              }
+            }
+          }
+        ])
+        const data = ref([
+          {
+            id: 0,
+            name: 'Item 0',
+            price: '$0'
+          },
+          {
+            id: 1,
+            name: 'Item 1',
+            price: '$1'
+          },
+          {
+            id: 2,
+            name: 'Item 2',
+            price: '$2'
+          },
+          {
+            id: 3,
+            name: 'Item 3',
+            price: '$3'
+          },
+          {
+            id: 4,
+            name: 'Item 4',
+            price: '$4'
+          },
+          {
+            id: 5,
+            name: 'Item 5',
+            price: '$5'
+          }
+        ])
+        const options = ref({
+          search: true,
+          showColumns: true
+        })
+
+        setTimeout(() => {
+          options.value.showColumns = false
+        }, 10000)
+
+        return {
+          columns,
+          data,
+          options
+        }
+      }
+    })
+
+    app.component('BootstrapTable', window.BootstrapTable)
+    app.mount('#app')
+  }
+</script>
